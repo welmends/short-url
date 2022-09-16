@@ -2,9 +2,22 @@ version: "3.8"
 
 services:
   api:
-    build: "api/Dockerfile"
+    build:
+      context: "api/"
+      dockerfile: "Dockerfile"
     container_name: api
     volumes:
-      - .:/app
+      - ./api:/app
     ports:
       - 8000:8000
+
+  web:
+    build:
+      context: "web/"
+      dockerfile: "Dockerfile"
+    container_name: web
+    volumes:
+      - "/app/node_modules"
+      - ./web:/app
+    ports:
+      - 3000:3000
